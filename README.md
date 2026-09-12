@@ -1,9 +1,9 @@
--## About
+## About
 
 Onara (One at a time) is an open source secuencial tasks desktop application for simple productivity.
 
--### Install
+### Install
 WIP
 
--## Images
+### Images
 WIP 
