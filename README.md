@@ -7,3 +7,6 @@ WIP
 
 ### Images
 WIP 
+
+### Modes
+Stack/Queue
