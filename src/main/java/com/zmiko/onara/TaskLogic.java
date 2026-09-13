@@ -2,23 +2,16 @@ package com.zmiko.onara;
 
 import java.util.ArrayList;
 
-enum mode {
-    Queue,
-    Stack
-}
-
 public class TaskLogic {
     private ArrayList<String> taskList;
     private mode mode;
 
     public TaskLogic() {
         this.taskList = new ArrayList<String>();
-        this.mode = com.zmiko.onara.mode.Queue;
     }
 
     public TaskLogic(ArrayList<String> taskFromDB) {
         this.taskList = taskFromDB;
-        this.mode = com.zmiko.onara.mode.Queue;
     }
 
     public void pushQueue(String task) {
