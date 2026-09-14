@@ -31,6 +31,14 @@ public class DatabaseControl {
         } catch (SQLException e) {
             System.err.println("Error, " + e.getMessage());
         }
+
+        if (!exists()) {
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("CREATE TABLE taskList (id INTEGER PRIMARY KEY, desc TEXT)");
+            } catch (SQLException e) {
+                System.err.println("Error, " + e.getMessage());
+            }
+        }
     }
 
     private Path getAppDataDirectory() {
@@ -76,5 +84,6 @@ public class DatabaseControl {
             return true;
         }
     }
+
 
 }

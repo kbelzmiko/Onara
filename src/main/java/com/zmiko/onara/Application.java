@@ -16,7 +16,9 @@ public class Application extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
         DatabaseControl db = new DatabaseControl();
 
-
+        if (db.isEmpty()) {
+            
+        }
         //Cheks if the database is empty, if it is creates a empty task list, if not retrieves the database.
         TaskLogic tasks = new TaskLogic();
 
