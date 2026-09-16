@@ -6,16 +6,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="280.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zmiko.onara.HelloController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="280.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zmiko.onara.TaskController">
    <children>
       <ButtonBar prefHeight="40.0" prefWidth="358.0">
         <buttons>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
             <Label prefHeight="18.0" prefWidth="149.0" text="Onara" />
-          <Button minWidth="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="392.0" text="Button" />
+          <Button fx:id="modeButton" onAction="#modeChange" minWidth="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="392.0" text="Queue" />
         </buttons>
          <padding>
             <Insets left="-20.0" right="10.0" />
@@ -23,19 +23,17 @@
       </ButtonBar>
       <VBox alignment="BOTTOM_CENTER" prefHeight="430.0" prefWidth="280.0">
          <children>
-            <TextField prefHeight="55.0" prefWidth="280.0" promptText="New Tasks">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </TextField>
-            <VBox alignment="TOP_CENTER" prefHeight="273.0" prefWidth="280.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Placeholder Next Task" textAlignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="newTask" onAction="#newTask" prefHeight="28.0" prefWidth="225.0" promptText="New Tasks">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </TextField>
+                  <Button mnemonicParsing="false" onAction="#newTask" prefHeight="28.0" prefWidth="110.0" text="add" />
                </children>
+            </HBox>
+            <VBox fx:id="tasksVb" alignment="TOP_CENTER" prefHeight="273.0" prefWidth="280.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -43,7 +41,7 @@
                   <Insets top="20.0" />
                </padding>
             </VBox>
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="222.0" text="Complete" />
+            <Button mnemonicParsing="false" onAction="#complete" prefHeight="51.0" prefWidth="222.0" text="Complete" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" />

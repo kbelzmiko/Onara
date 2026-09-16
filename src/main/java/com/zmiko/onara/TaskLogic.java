@@ -49,13 +49,20 @@ public class TaskLogic {
         }
     }
 
-    public ArrayList<Task> getTasks() {
-        return this.taskList;
+    public ArrayList<String> getTasks() {
+        ArrayList<String> result = new ArrayList<>();
+        for (Task t : this.taskList) {
+            result.add(t.getDesc());
+        }
+        return result;
     }
 
-    public boolean setMode(mode mode) {
+    public void setMode(mode mode) {
         this.mode = mode;
-        return true;
+    }
+
+    public mode getMode() {
+        return this.mode;
     }
 
 

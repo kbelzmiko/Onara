@@ -9,13 +9,11 @@ import java.io.IOException;
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        TaskLogic tasks;
 
-        tasks = new TaskLogic();
 
         //Test
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("tasks-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 280, 480);
         stage.setMinWidth(280);
         stage.setMaxWidth(280);
