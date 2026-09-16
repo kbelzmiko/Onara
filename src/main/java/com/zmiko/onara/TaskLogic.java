@@ -13,6 +13,7 @@ public class TaskLogic {
         } else {
             this.taskList = new ArrayList<Task>();
         }
+        this.mode = com.zmiko.onara.mode.Queue;
     }
 
 
@@ -22,7 +23,7 @@ public class TaskLogic {
     }
 
 
-    public Task popQueue() {
+    private Task popQueue() {
         if (!this.taskList.isEmpty()) {
             this.db.pop(this.taskList.get(0).getId());
             return this.taskList.remove(0);
@@ -31,7 +32,7 @@ public class TaskLogic {
         }
     }
 
-    public Task popStack() {
+    private Task popStack() {
         if (!this.taskList.isEmpty()) {
             this.db.pop(this.taskList.get(this.taskList.size()-1).getId());
             return this.taskList.remove(this.taskList.size()-1);
@@ -40,8 +41,21 @@ public class TaskLogic {
         }
     }
 
+    public Task pop() {
+        if (this.mode == com.zmiko.onara.mode.Queue) {
+            return popQueue();
+        } else {
+            return popStack();
+        }
+    }
+
     public ArrayList<Task> getTasks() {
         return this.taskList;
+    }
+
+    public boolean setMode(mode mode) {
+        this.mode = mode;
+        return true;
     }
 
 

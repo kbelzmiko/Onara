@@ -6,11 +6,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-enum mode {
-    Queue,
-    Stack
-}
-
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
@@ -19,10 +14,6 @@ public class Application extends javafx.application.Application {
         tasks = new TaskLogic();
 
         //Test
-        tasks.push("tets");
-        tasks.push("tets2");
-        tasks.push("tets3");
-
 
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 280, 480);
