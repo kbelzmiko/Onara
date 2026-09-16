@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseControl {
     private static final String APP_DIR_NAME = "com.zmiko.onara";
@@ -34,7 +35,7 @@ public class DatabaseControl {
 
         if (!exists()) {
             try (Statement stmt = conn.createStatement()) {
-                stmt.execute("CREATE TABLE taskList (id INTEGER PRIMARY KEY, desc TEXT)");
+                stmt.execute("CREATE TABLE taskList (id INTEGER PRIMARY KEY, description TEXT)");
             } catch (SQLException e) {
                 System.err.println("Error, " + e.getMessage());
             }
@@ -80,10 +81,74 @@ public class DatabaseControl {
             return !rs.next();
 
         } catch (SQLException e) {
-            System.err.println("Error, " + e.getMessage());
+            System.err.println("Error ISEMPTY, " + e.getMessage());
             return true;
         }
     }
 
+    public ArrayList<Task> getFromDatabase() {
+        ArrayList<Task> result = new ArrayList<>();
 
+        String sql = "SELECT id, description FROM taskList ORDER BY id ASC";
+
+        try {
+            PreparedStatement pstmt = this.conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String desc = rs.getString("description");
+                result.add(new Task(id,desc));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error GETFROM, " + e.getMessage());
+        }
+        return result;
+    }
+
+    public boolean insert(String task) {
+        String sql = "INSERT INTO taskList (description) VALUES (?)";
+
+        try {
+            PreparedStatement pstmt = this.conn.prepareStatement(sql);
+            pstmt.setString(1, task);
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Error INSERT, " + e.getMessage());
+            return false;
+        }
+
+    }
+
+    public boolean pop(int id) {
+        String sql = "DELETE FROM taskList WHERE id = ?";
+
+        try {
+            PreparedStatement pstmt = this.conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error POP, " + e.getMessage());
+        }
+
+        return true;
+    }
+
+    public int getLastId() {
+        String sql = "SELECT COALESCE(MAX(id), 0) AS max_id FROM taskList";
+
+        try {
+            PreparedStatement pstmt = this.conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+                return rs.getInt("max_id");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error LASTID, " + e.getMessage());
+        }
+        return 0;
+    }
 }

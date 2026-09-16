@@ -3,44 +3,44 @@ package com.zmiko.onara;
 import java.util.ArrayList;
 
 public class TaskLogic {
-    private ArrayList<String> taskList;
+    private ArrayList<Task> taskList;
     private mode mode;
+    private final DatabaseControl db = new DatabaseControl();
 
     public TaskLogic() {
-        this.taskList = new ArrayList<String>();
-    }
-
-    public TaskLogic(ArrayList<String> taskFromDB) {
-        this.taskList = taskFromDB;
-    }
-
-    public void pushQueue(String task) {
-        this.taskList.add(task);
-    }
-
-    public void pushStack(String task) {
-        if (!this.taskList.isEmpty()) {
-            this.taskList.add(0,task);
-        } else {this.taskList.add(task);}
-    }
-
-    public String popQueue() {
-        if (!this.taskList.isEmpty()) {
-            return this.taskList.remove(this.taskList.size()-1);
+        if (!db.isEmpty()) {
+            this.taskList = db.getFromDatabase();
         } else {
-            return null;
+            this.taskList = new ArrayList<Task>();
         }
     }
 
-    public String popStack() {
+
+    public void push(String task) {
+        this.taskList.add(new Task(this.db.getLastId()+1,task));
+        this.db.insert(task);
+    }
+
+
+    public Task popQueue() {
         if (!this.taskList.isEmpty()) {
+            this.db.pop(this.taskList.get(0).getId());
             return this.taskList.remove(0);
         } else {
             return null;
         }
     }
 
-    public ArrayList<String> getTasks() {
+    public Task popStack() {
+        if (!this.taskList.isEmpty()) {
+            this.db.pop(this.taskList.get(this.taskList.size()-1).getId());
+            return this.taskList.remove(this.taskList.size()-1);
+        } else {
+            return null;
+        }
+    }
+
+    public ArrayList<Task> getTasks() {
         return this.taskList;
     }
 

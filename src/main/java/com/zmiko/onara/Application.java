@@ -14,13 +14,14 @@ enum mode {
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        DatabaseControl db = new DatabaseControl();
+        TaskLogic tasks;
 
-        if (db.isEmpty()) {
-            
-        }
-        //Cheks if the database is empty, if it is creates a empty task list, if not retrieves the database.
-        TaskLogic tasks = new TaskLogic();
+        tasks = new TaskLogic();
+
+        //Test
+        tasks.push("tets");
+        tasks.push("tets2");
+        tasks.push("tets3");
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("hello-view.fxml"));
