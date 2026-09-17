@@ -52,8 +52,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
+                    <release>21</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -65,10 +64,10 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.zmiko.onara/com.zmiko.onara.Application</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
+                            <mainClass>com.zmiko.onara/com.zmiko.onara.Launcher</mainClass>
+                            <launcher>Onara</launcher>
+                            <jlinkZipName>Onara</jlinkZipName>
+                            <jlinkImageName>Onara</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
